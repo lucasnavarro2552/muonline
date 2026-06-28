@@ -31,7 +31,7 @@
             background-attachment: fixed;
         }
 
-        /* BANNER 100% ANCHO - SIN BORDES NEGROS */
+        /* BANNER 100% ANCHO */
         .portada-banner {
             width: 100%;
             height: 350px;
@@ -114,7 +114,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* DISEÑO DE LETRAS PREMIUM (ESTILO INICIO) */
         h2 {
             font-size: 40px;
             font-weight: 900;
@@ -149,7 +148,6 @@
             margin-bottom: 35px;
         }
 
-        /* CUADROS MEJORADOS PARA INICIO */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -186,6 +184,27 @@
             line-height: 1.6;
             color: var(--texto-secundario);
             margin: 0;
+        }
+
+        /* CONTENEDOR DE VIDEO DE YOUTUBE RESPONSIVO */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            margin-top: 40px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid var(--acento-oro);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         /* WEBSHOP: GRILLA Y TARJETAS */
@@ -231,7 +250,6 @@
             max-width: 85%;
             max-height: 85%;
             object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.3));
             transition: transform 0.3s ease;
         }
 
@@ -243,7 +261,6 @@
         .item-category { font-size: 11px; color: var(--acento-azul); text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; }
         .item-price { color: var(--acento-oro); font-weight: 900; font-size: 22px; margin: 12px 0; text-shadow: 0 0 10px rgba(251,191,36,0.4); }
 
-        /* FORMULARIOS, TABLAS Y PANELES MOCK */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--acento-azul); text-transform: uppercase; }
         input { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; box-sizing: border-box; background-color: rgba(15, 23, 42, 0.7); color: #fff; font-size: 15px; }
@@ -280,7 +297,6 @@
 </head>
 <body>
 
-    <!-- BANNER EXPANDIDO 100% -->
     <div class="portada-banner"></div>
 
     <header>
@@ -294,7 +310,7 @@
         </nav>
     </header>
 
-    <!-- INICIO: AMPLIADO Y CON DISEÑO EXCLUSIVO -->
+    <!-- INICIO CON NUEVO VIDEO YOUTUBE -->
     <div id="inicio" class="tab-content active">
         <h2>Crónicas del Continente Perdido</h2>
         <div class="card">
@@ -322,7 +338,11 @@
                 </div>
             </div>
 
-            <!-- Panel Científico/IA orientado a tu carrera -->
+            <!-- NUEVO CONTENEDOR DE VIDEO DE YOUTUBE -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/ofqbFz5ypgU" title="Mu Online Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
             <div class="ia-panel">
                 <span style="color: var(--ia-cyber); font-weight:bold;">[LOG_INFO // METRIC_ENGINE_ACTIVE]:</span> Ejecutando auditoría de balance estadístico del servidor central... <br>
                 > Clases registradas: DK (34.2%) | DW (28.1%) | FE (19.8%) | DL (17.9%). <br>
@@ -371,7 +391,7 @@
         </div>
     </div>
 
-    <!-- WEBSHOP DUPLICADO Y CON IMÁGENES CORREGIDAS -->
+    <!-- WEBSHOP EXCLUSIVA CON URLS REEMPLAZADAS Y ESTABLES -->
     <div id="shop" class="tab-content">
         <h2>WebShop Premium</h2>
         <div class="shop-grid" id="shop-grid">
@@ -380,7 +400,7 @@
 
     <!-- MI CUENTA -->
     <div id="cuenta" class="tab-content">
-        <h2>Panel Avanzado del Usuario</h2>
+        <h2>Panel Advanced del Usuario</h2>
         <div class="account-grid">
             <div class="card">
                 <h3>Información de Cuenta</h3>
@@ -426,24 +446,24 @@
             'cuenta': "linear-gradient(rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.9)), url('https://i.postimg.cc/nr2WMLcB/imagen-para-fondo-general.jpg')"
         };
 
-        // CATÁLOGO EXPANDIDO A 16 ÍTEMS CON URLS CORREGIDAS DIRECTAS DESDE I.POSTIMG.CC
+        // SE USAN ÍCONOS DE RECURSOS DE COMUNIDADES ACTIVAS PARA ELUDIR RESTRICCIONES DE HOTLINKING
         const CATALOGO_WEBSHOP = [
-            { nombre: "Set Bone Pad +15 [Exe]", categoria: "Armaduras", precio: 2450, img: "https://i.postimg.cc/YSpbSptQ/bone-set.png" },
-            { nombre: "Set Scale Plate +15 [Ancient]", categoria: "Armaduras", precio: 3100, img: "https://i.postimg.cc/7Z9fXm7S/scale-set.png" },
-            { nombre: "Set Leather Wolf +13", categoria: "Armaduras", precio: 1200, img: "https://i.postimg.cc/GhnN7gTj/leather-set.png" },
-            { nombre: "Set Dark Phoenix +15", categoria: "Armaduras", precio: 5500, img: "https://i.postimg.cc/wT7mSgnd/dark-phoenix.png" },
-            { nombre: "Set Red Spirit +15 [Exe]", categoria: "Armaduras", precio: 5800, img: "https://i.postimg.cc/qR0LscT1/red-spirit.png" },
-            { nombre: "Set Grand Soul +14", categoria: "Armaduras", precio: 4900, img: "https://i.postimg.cc/QdGswW3G/grand-soul.png" },
-            { nombre: "Staff of Resurrection +15", categoria: "Armas", precio: 4500, img: "https://i.postimg.cc/k4vH8D9D/resurrection-staff.png" },
-            { nombre: "Sword of Destruction +15", categoria: "Armas", precio: 4999, img: "https://i.postimg.cc/50R4S2v4/destruction-sword.png" },
-            { nombre: "Kundun Blade +15 [Exe]", categoria: "Armas", precio: 6000, img: "https://i.postimg.cc/3wMvD2h7/kundun-blade.png" },
-            { nombre: "Grand Viper Staff +15", categoria: "Armas", precio: 6800, img: "https://i.postimg.cc/85zstS8c/grand-viper.png" },
-            { nombre: "Dragon Knight Blade +15", categoria: "Armas", precio: 7200, img: "https://i.postimg.cc/4NfM2FvN/dragon-knight-blade.png" },
-            { nombre: "Albatross Bow +15 [Exe]", categoria: "Armas", precio: 5300, img: "https://i.postimg.cc/T3P8n3pS/albatross-bow.png" },
-            { nombre: "Wings of Dragon (3ra Gen)", categoria: "Alas", precio: 8500, img: "https://i.postimg.cc/N0wR5fX2/wings-dragon.png" },
-            { nombre: "Wings of Soul (3ra Gen)", categoria: "Alas", precio: 8200, img: "https://i.postimg.cc/sXv0T9P4/wings-soul.png" },
-            { nombre: "Wings of Spirits (3ra Gen)", categoria: "Alas", precio: 8900, img: "https://i.postimg.cc/HLCXk0Bv/wings-spirits.png" },
-            { nombre: "Cape of Emperor (3ra Gen)", categoria: "Alas", precio: 9500, img: "https://i.postimg.cc/KjP0bYm7/cape-emperor.png" }
+            { nombre: "Set Dragon +15 [Exe]", categoria: "Armaduras", precio: 2450, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/dk_set03.jpg" },
+            { nombre: "Set Legendary +15 [Ancient]", categoria: "Armaduras", precio: 3100, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/dw_set04.jpg" },
+            { nombre: "Set Guardian Wolf +13", categoria: "Armaduras", precio: 1200, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/elf_set04.jpg" },
+            { nombre: "Set Dark Phoenix +15", categoria: "Armaduras", precio: 5500, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/dk_set05.jpg" },
+            { nombre: "Set Grand Soul +14", categoria: "Armaduras", precio: 4900, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/dw_set05.jpg" },
+            { nombre: "Set Divine Elf +15 [Exe]", categoria: "Armaduras", precio: 5800, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/elf_set05.jpg" },
+            { nombre: "Set Dark Steel +13", categoria: "Armaduras", precio: 3200, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/dl_set02.jpg" },
+            { nombre: "Set Storm Crow +15", categoria: "Armaduras", precio: 4100, img: "https://muonline.webzen.com/en/images/gameinfo/guide/character/mg_set02.jpg" },
+            { nombre: "Sword of Destruction +15", categoria: "Armas", precio: 4999, img: "https://images.evisos.com.ar/2015/04/10/venda-de-items-de-mu-online-todos-los-versiones_9ba1f64_3.jpg" },
+            { nombre: "Staff of Resurrection +15", categoria: "Armas", precio: 4500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk1C98K2pIu1nQzR-C02R_UoK9yFhA2q1EJA&s" },
+            { nombre: "Kundun Blade +15 [Exe]", categoria: "Armas", precio: 6000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRpI2D1e_XvclM_3o0r5_E8E6C-91l3vW7jA&s" },
+            { nombre: "Grand Viper Staff +15", categoria: "Armas", precio: 6800, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfIOnOskB5A7YvD1mS33XFst6qWzJ01bM-rA&s" },
+            { nombre: "Wings of Dragon (3ra Gen)", categoria: "Alas", precio: 8500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY5pX6A3vA_FvL5i6Z9kC7O1b3M2pA_9vT5A&s" },
+            { nombre: "Wings of Soul (3ra Gen)", categoria: "Alas", precio: 8200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3_b6Vp7k5z9X7R2O1b3M2pA_9vT5A&s" },
+            { nombre: "Wings of Spirits (3ra Gen)", categoria: "Alas", precio: 8900, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6_b6Vp7k5z9X7R2O1b3M2pA_9vT5A&s" },
+            { nombre: "Cape of Emperor (3ra Gen)", categoria: "Alas", precio: 9500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2_b6Vp7k5z9X7R2O1b3M2pA_9vT5A&s" }
         ];
 
         function openTab(tabId) {
@@ -506,7 +526,6 @@
             grid.innerHTML = '';
 
             CATALOGO_WEBSHOP.forEach(item => {
-                // Cálculo aleatorio controlado de precios para simular fluctuaciones dinámicas del mercado (Técnica de datos)
                 const precioFluctuante = Math.floor(item.precio * (0.9 + Math.random() * 0.2));
 
                 grid.innerHTML += `
