@@ -8,94 +8,102 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
-            --bg-card: rgba(255, 255, 255, 0.9); /* Tarjetas semi-transparentes para lucir el fondo */
-            --texto: #0f172a;
-            --texto-secundario: #475569;
-            --acento-azul: #0ea5e9;
-            --acento-oro: #d97706;
-            --glow-azul: rgba(14, 165, 233, 0.5);
-            --borde: rgba(0, 0, 0, 0.08);
+            --bg-card: rgba(15, 23, 42, 0.75); /* Tarjetas oscuras para contrastar con el fondo */
+            --texto: #f8fafc; /* Texto principal claro */
+            --texto-secundario: #cbd5e1;
+            --acento-azul: #38bdf8;
+            --acento-oro: #fbbf24; /* Dorado del juego */
+            --glow-oro: rgba(251, 191, 36, 0.5);
+            --borde: rgba(255, 255, 255, 0.1);
         }
 
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            /* Fondo General Aplicado */
-            background: linear-gradient(rgba(248, 250, 252, 0.85), rgba(248, 250, 252, 0.85)), url('https://i.postimg.cc/nr2WMLcB/imagen-para-fondo-general.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             color: var(--texto);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            background-color: #020617;
+            /* Efecto de transición suave al cambiar de fondo */
+            transition: background 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        /* Banner de Portada Arriba del Todo */
+        /* Banner de Portada Ajustado para ver los personajes completos */
         .portada-banner {
             width: 100%;
-            height: 250px;
-            background: url('https://i.postimg.cc/WbQGgvFk/Mu-online-imagente-para-portada.jpg') center center no-repeat;
-            background-size: cover;
-            border-bottom: 2px solid var(--acento-azul);
-            box-shadow: inset 0 -30px 40px rgba(0,0,0,0.4);
+            height: 280px;
+            background: url('https://i.postimg.cc/WbQGgvFk/Mu-online-imagente-para-portada.jpg') center top no-repeat;
+            background-size: contain; /* Ajusta la imagen completa sin cortar personajes */
+            background-color: #000;
+            border-bottom: 2px solid var(--acento-oro);
         }
 
-        /* Navbar Moderna */
+        /* Header con estructura centrada e innovadora */
         header {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column; /* Apila el título arriba y los botones abajo */
             align-items: center;
             padding: 15px 5%;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid var(--borde);
             z-index: 100;
+            gap: 15px;
         }
 
+        /* Nombre centrado y dorado */
         .logo {
-            font-weight: 800;
-            font-size: 24px;
-            color: var(--acento-azul);
+            font-weight: 900;
+            font-size: 32px;
+            color: var(--acento-oro);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px var(--glow-oro), 0 2px 4px rgba(0,0,0,0.8);
+            text-align: center;
         }
 
         nav {
             display: flex;
-            gap: 8px;
+            gap: 12px;
+            justify-content: center;
+            width: 100%;
         }
 
         nav button {
-            background: transparent;
-            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--borde);
             color: var(--texto-secundario);
-            padding: 10px 18px;
+            padding: 12px 24px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
-        /* Botón iluminado al pasar el cursor (Efecto Glow Innovador) */
+        /* Botón activo e iluminado */
         nav button:hover, nav button.active-nav {
-            background-color: white;
-            color: var(--acento-azul);
-            box-shadow: 0 0 20px var(--glow-azul);
-            transform: translateY(-1px);
+            background-color: var(--acento-oro);
+            color: #020617;
+            border-color: var(--acento-oro);
+            box-shadow: 0 0 20px var(--glow-oro);
+            transform: translateY(-2px);
         }
 
         /* Contenedor de Pestañas */
         .tab-content {
             display: none;
-            padding: 40px 5%;
-            max-width: 1200px;
+            padding: 50px 5%;
+            max-width: 1000px;
             margin: 0 auto;
-            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .tab-content.active {
@@ -103,67 +111,37 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* Títulos de sección */
         h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
-        }
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background: var(--acento-azul);
-            border-radius: 2px;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
 
-        /* Contenedores con Imágenes de Fondo Propias */
-        .card-bg-auth {
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://i.postimg.cc/pLfFjnMB/imagen-de-fondo-para-la-creacion-de-cuentas.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .card-bg-ranking {
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://i.postimg.cc/J0Xbd6SN/imagen-para-ranking.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .card-bg-shop {
-            background: linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)), url('https://i.postimg.cc/VstnwhH8/imagen-para-webshp.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 30px;
-            border-radius: 24px;
-            border: 1px solid var(--borde);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-        }
-
-        /* Formularios y Tarjetas Modernas */
+        /* Tarjetas con legibilidad garantizada ante fondos oscuros */
         .card {
             background: var(--bg-card);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--borde);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             max-width: 450px;
-            margin: 20px auto;
+            margin: 0 auto;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         label {
@@ -171,64 +149,67 @@
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
-            color: var(--texto);
+            color: var(--acento-azul);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         input {
             width: 100%;
             padding: 14px;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
             box-sizing: border-box;
             font-size: 15px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(15, 23, 42, 0.6);
+            color: #fff;
             transition: all 0.3s;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--acento-azul);
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+            border-color: var(--acento-oro);
+            background-color: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 12px var(--glow-oro);
         }
 
         .btn-glow {
             width: 100%;
-            background: var(--acento-azul);
-            color: white;
+            background: var(--acento-oro);
+            color: #020617;
             border: none;
             padding: 14px;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
-            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
         }
 
         .btn-glow:hover {
-            box-shadow: 0 0 25px var(--glow-azul);
+            box-shadow: 0 0 25px var(--glow-oro);
             transform: translateY(-2px);
-            opacity: 0.95;
         }
 
         .btn-secondary {
             width: 100%;
-            background: rgba(255, 255, 255, 0.7);
+            background: transparent;
             color: var(--texto-secundario);
-            border: 1px solid #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 12px;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            margin-top: 12px;
         }
 
         .btn-secondary:hover {
-            background: #fff;
-            color: var(--texto);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
         }
 
         /* Grid de la Tienda de Items (WebShop) */
@@ -236,84 +217,62 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
-            margin-top: 20px;
         }
 
         .item-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-            border: 1px solid var(--borde);
-            text-align: center;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 25px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         .item-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15);
-            border-color: rgba(14, 165, 233, 0.4);
-            background: #ffffff;
+            border-color: var(--acento-oro);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.2);
         }
 
         .item-img {
             width: 100%;
-            height: 160px;
+            height: 140px;
             margin-bottom: 15px;
-            background: rgba(241, 245, 249, 0.8);
-            border-radius: 14px;
+            background: rgba(2, 6, 23, 0.6);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-        }
-
-        .item-img img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            transition: transform 0.3s;
-        }
-
-        .item-card:hover .item-img img {
-            transform: scale(1.08);
         }
 
         .item-title {
             font-size: 18px;
             font-weight: 700;
+            color: #fff;
             margin: 10px 0 5px 0;
-        }
-
-        .item-desc {
-            font-size: 13px;
-            color: var(--texto-secundario);
-            margin-bottom: 15px;
-            height: 40px;
-            overflow: hidden;
         }
 
         .item-price {
             color: var(--acento-oro);
             font-weight: 800;
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 22px;
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
         }
 
-        /* Tabla de Rankings Moderna */
+        /* Tabla de Rankings */
         .table-container {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            border: 1px solid var(--borde);
-            padding: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         table {
@@ -324,60 +283,47 @@
 
         th, td {
             padding: 18px 24px;
-            font-size: 15px;
         }
 
         th {
-            background-color: rgba(248, 250, 252, 0.7);
+            background-color: rgba(2, 6, 23, 0.8);
             color: var(--acento-azul);
             font-weight: 700;
-            border-bottom: 1px solid var(--borde);
+            border-bottom: 2px solid rgba(255,255,255,0.1);
             text-transform: uppercase;
             font-size: 13px;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         tr {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-            transition: background-color 0.2s;
-        }
-
-        tr:last-child {
-            border-bottom: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         tr:hover td {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.03);
         }
 
         .rank-number {
             font-weight: 800;
-            color: var(--texto-secundario);
         }
-        tr:nth-child(1) .rank-number { color: #eab308; font-size: 18px; }
+        tr:nth-child(1) .rank-number { color: #fbbf24; font-size: 18px; }
         tr:nth-child(2) .rank-number { color: #94a3b8; font-size: 17px; }
         tr:nth-child(3) .rank-number { color: #b45309; font-size: 16px; }
 
         /* Panel de Cuenta */
         .account-layout {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr 1.5fr;
             gap: 30px;
         }
         @media (max-width: 768px) {
             .account-layout { grid-template-columns: 1fr; }
         }
 
-        .character-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
         .character-item {
-            background: rgba(248, 250, 252, 0.8);
+            background: rgba(2, 6, 23, 0.5);
             border: 1px solid var(--borde);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 15px;
             margin-bottom: 12px;
             display: flex;
@@ -388,11 +334,13 @@
 </head>
 <body>
 
-    <!-- Imagen de Portada Superior -->
+    <!-- Imagen de Portada con dimensiones corregidas -->
     <div class="portada-banner"></div>
 
     <header>
-        <div class="logo">✨ Mu Next-Gen</div>
+        <!-- Nombre centrado y dorado arriba -->
+        <div class="logo">Mu Next-Gen</div>
+        <!-- Navegación abajo -->
         <nav>
             <button id="btn-inicio" class="active-nav" onclick="openTab('inicio')">Inicio</button>
             <button id="btn-login" onclick="openTab('login')">Acceso</button>
@@ -405,17 +353,17 @@
     <!-- INICIO -->
     <div id="inicio" class="tab-content active">
         <h2>Bienvenido a la Nueva Era</h2>
-        <div class="card" style="margin: 0; max-width: 100%;">
-            <p style="color: var(--texto-secundario); font-size: 16px; line-height: 1.6; margin: 0;">
+        <div class="card" style="max-width: 650px; text-align: center;">
+            <p style="color: var(--texto-secundario); font-size: 16px; line-height: 1.8; margin: 0;">
                 Experimenta la última versión de Mu Online (Season 19/20+) sobre una interfaz completamente limpia, clara e innovadora. Conectado en tiempo real mediante Supabase.
             </p>
         </div>
     </div>
 
-    <!-- LOGIN / REGISTRO (CON IMAGEN DE FONDO DE CREACIÓN DE CUENTAS) -->
+    <!-- LOGIN / REGISTRO -->
     <div id="login" class="tab-content">
-        <div class="card card-bg-auth">
-            <h3 id="auth-title" style="margin-top:0; font-size: 22px; text-shadow: 0 1px 2px white;">Ingresar al Reino</h3>
+        <div class="card">
+            <h3 id="auth-title" style="margin-top:0; font-size: 24px; text-align:center; color: #fff;">Ingresar al Reino</h3>
             <div class="form-group">
                 <label>Correo Electrónico</label>
                 <input type="email" id="login-email" placeholder="tu-email@correo.com">
@@ -429,10 +377,10 @@
         </div>
     </div>
 
-    <!-- RANKING (CON IMAGEN DE FONDO DE RANKING) -->
+    <!-- RANKING -->
     <div id="ranking" class="tab-content">
         <h2>Top Héroes del Servidor</h2>
-        <div class="table-container card-bg-ranking">
+        <div class="table-container">
             <table>
                 <thead>
                     <tr>
@@ -450,13 +398,11 @@
         </div>
     </div>
 
-    <!-- WEBSHOP (CON IMAGEN DE FONDO DE WEBSHOP) -->
+    <!-- WEBSHOP -->
     <div id="shop" class="tab-content">
         <h2>Tienda de Ítems Legendarios</h2>
-        <div class="card-bg-shop">
-            <div class="shop-grid" id="shop-grid">
-                <div style="grid-column: 1/-1; text-align:center; color:var(--texto-secundario);">Cargando ítems desde tu Base de Datos...</div>
-            </div>
+        <div class="shop-grid" id="shop-grid">
+            <div style="grid-column: 1/-1; text-align:center; color:var(--texto-secundario);">Cargando ítems desde tu Base de Datos...</div>
         </div>
     </div>
 
@@ -472,7 +418,7 @@
                 <button class="btn-secondary" style="margin-top: 20px; border-color: #fca5a5; color: #ef4444;" onclick="logout()">Cerrar Sesión</button>
             </div>
             <div class="card" style="margin:0; max-width: 100%;">
-                <h3 style="margin-top:0;">Mis Personajes Criados</h3>
+                <h3 style="margin-top:0;">Mis Personajes</h3>
                 <ul class="character-list" id="character-list">
                     <li style="color: var(--texto-secundario); list-style: none;">Inicia sesión para inspeccionar tus personajes.</li>
                 </ul>
@@ -481,23 +427,38 @@
     </div>
 
     <script>
-        // 1. CREDENCIALES CONFIGURADAS DIRECTAMENTE
+        // Mapeo estricto de imágenes de fondo oscurecidas para máxima nitidez
+        const fondosPorPestaña = {
+            'inicio': "linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.75)), url('https://i.postimg.cc/nr2WMLcB/imagen-para-fondo-general.jpg')",
+            'login': "linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.75)), url('https://i.postimg.cc/pLfFjnMB/imagen-de-fondo-para-la-creacion-de-cuentas.jpg')",
+            'ranking': "linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), url('https://i.postimg.cc/J0Xbd6SN/imagen-para-ranking.jpg')",
+            'shop': "linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), url('https://i.postimg.cc/VstnwhH8/imagen-para-webshp.jpg')",
+            'cuenta': "linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), url('https://i.postimg.cc/nr2WMLcB/imagen-para-fondo-general.jpg')"
+        };
+
+        // Credenciales Oficiales de tu Supabase
         const SUPABASE_URL = "https://xbbfhkjxcacekrwfjmgp.supabase.co"; 
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiZmhranhjYWNla3J3ZmptZ3BvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MjI5MjgsImV4cCI6MjA5Nzk5ODkyOH0.mxLhSzoc_vIqAgVvWiW-bIMgRvp_GKCyMTGbpMrqIyA";
         
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         let esModoLogin = true;
 
-        // 2. PESTAÑAS INTERACTIVAS
+        // Función interactiva de cambio de pestañas con actualización de fondos a pantalla completa
         function openTab(tabId) {
+            // 1. Ocultar y mostrar contenedores
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
 
+            // 2. Cambiar estilos del botón de navegación activo
             const navButtons = document.querySelectorAll('nav button');
             navButtons.forEach(btn => btn.classList.remove('active-nav'));
             document.getElementById(`btn-${tabId}`).classList.add('active-nav');
 
+            // 3. CAMBIAR EL FONDO GENERAL DE LA WEB SEGÚN LA PESTAÑA SELECCIONADA
+            document.body.style.backgroundImage = fondosPorPestaña[tabId];
+
+            // 4. Cargar datos dinámicos
             if (tabId === 'ranking') cargarRanking();
             if (tabId === 'shop') cargarTienda();
             if (tabId === 'cuenta') cargarDatosCuenta();
@@ -520,7 +481,6 @@
             }
         }
 
-        // 3. AUTENTICACIÓN REAL
         async function manejarAuth() {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
@@ -544,7 +504,7 @@
                 }
                 openTab('cuenta');
             } catch (error) {
-                alert("Error de autenticación: " + error.message);
+                alert("Error: " + error.message);
             }
         }
 
@@ -559,7 +519,6 @@
             openTab('inicio');
         }
 
-        // 4. LEER RANKING DESDE SUPABASE
         async function cargarRanking() {
             const fallbackRanking = [
                 { nombre: 'GrandMasterX', clase: 'Soul Master', resets: 500, nivel: 400 },
@@ -577,7 +536,6 @@
                 if (error) throw error;
                 renderRankingRows(personajes && personajes.length ? personajes : fallbackRanking);
             } catch (err) {
-                console.warn("Cargando datos demo del ranking:", err.message);
                 renderRankingRows(fallbackRanking);
             }
         }
@@ -598,7 +556,6 @@
             });
         }
 
-        // 5. LEER WEBSHOP DESDE SUPABASE
         async function cargarTienda() {
             const fallbackItems = [
                 { id: 1, nombre: 'Wings of Ruin (4ta Gen)', descripcion: 'Alas de última generación con bonus críticos elementales.', precio_wcoins: 2500, imagen_url: '🛡️' },
@@ -613,7 +570,6 @@
                 if (error) throw error;
                 renderShopGrid(items && items.length ? items : fallbackItems);
             } catch (err) {
-                console.warn("Mostrando ítems demo:", err.message);
                 renderShopGrid(fallbackItems);
             }
         }
@@ -630,7 +586,7 @@
                         <div class="item-img">${renderImg}</div>
                         <div>
                             <div class="item-title">${item.nombre}</div>
-                            <div class="item-desc">${item.descripcion || 'Sin descripción.'}</div>
+                            <div class="item-desc" style="color: var(--texto-secundario); font-size:13px; height:40px; overflow:hidden;">${item.descripcion || 'Sin descripción.'}</div>
                         </div>
                         <div>
                             <div class="item-price">${item.precio_wcoins.toLocaleString()} WCoins</div>
@@ -645,7 +601,6 @@
             alert(`Solicitud enviada para comprar el Ítem ID: ${itemId}.`);
         }
 
-        // 6. CONTROL DEL PANEL DE CUENTA
         async function cargarDatosCuenta() {
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
@@ -666,7 +621,7 @@
                 list.innerHTML = '';
                 
                 if(!pjs || pjs.length === 0) {
-                    list.innerHTML = '<li style="color: var(--texto-secundario); list-style:none;">No posees personajes vinculados a este usuario en Supabase.</li>';
+                    list.innerHTML = '<li style="color: var(--texto-secundario); list-style:none;">No posees personajes vinculados.</li>';
                     return;
                 }
 
@@ -675,7 +630,7 @@
                         <li class="character-item">
                             <div>
                                 <strong>${pj.nombre}</strong><br>
-                                <small style="color:var(--texto-secundario)">${pj.clase}</small>
+                                <small style="color:var(--acento-azul)">${pj.clase}</small>
                             </div>
                             <span>Nivel ${pj.nivel} (${pj.resets} RR)</span>
                         </li>
@@ -685,10 +640,12 @@
                 document.getElementById('user-wcoins').innerText = pjs[0].wcoins.toLocaleString();
 
             } catch (err) {
-                console.error("Error leyendo datos privados:", err.message);
+                console.error(err.message);
             }
         }
 
+        // Ejecutar el fondo de inicio por defecto
+        document.body.style.backgroundImage = fondosPorPestaña['inicio'];
         setTimeout(cargarDatosCuenta, 500);
     </script>
 </body>
