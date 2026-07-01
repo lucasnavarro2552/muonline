@@ -4,78 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mu Online Next-Gen - Premium Data Edition</title>
-    <!-- SDK Oficial de Supabase -->
+    
+    <!-- SDK Oficial de Supabase: Habilita la conexión y el uso de la base de datos relacional en la nube -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
+        /* VARIABLES GLOBALES (Custom Properties): Centralizan la paleta de colores para reutilizarlos en el proyecto */
         :root {
-            --bg-card: rgba(10, 15, 30, 0.9);
-            --texto: #f1f5f9;
-            --texto-secundario: #94a3b8;
-            --acento-azul: #38bdf8;
-            --acento-oro: #fbbf24;
-            --glow-oro: rgba(251, 191, 36, 0.6);
-            --borde: rgba(251, 191, 36, 0.2);
-            --ia-cyber: #10b981;
+            --bg-card: rgba(10, 15, 30, 0.9);         /* Fondo semitransparente oscuro para las tarjetas */
+            --texto: #f1f5f9;                        /* Color principal del texto (Blanco hueso) */
+            --texto-secundario: #94a3b8;             /* Color para descripciones o textos de menor jerarquía */
+            --acento-azul: #38bdf8;                  /* Color de acento para elementos tecnológicos/UI */
+            --acento-oro: #fbbf24;                   /* Color de acento premium para elementos importantes y títulos */
+            --glow-oro: rgba(251, 191, 36, 0.6);     /* Sombra/Resplandor dorado */
+            --borde: rgba(251, 191, 36, 0.2);        /* Color de los bordes sutiles */
+            --ia-cyber: #10b981;                     /* Color verde esmeralda para secciones de telemetría o logs */
         }
 
+        /* CONFIGURACIÓN GENERAL DEL CUERPO (BODY) */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: var(--texto);
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
-            background-color: #020617;
-            transition: background 0.5s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            overflow-x: hidden;                      /* Evita el desplazamiento horizontal no deseado */
+            background-color: #020617;               /* Fondo de respaldo en caso de que la imagen de fondo tarde en cargar */
+            transition: background 0.5s ease-in-out; /* Transición suave de 0.5s cuando cambia el fondo entre pestañas */
+            background-size: cover;                  /* Escala la imagen para cubrir toda la pantalla disponible */
+            background-position: center;             /* Centra el fondo */
+            background-attachment: fixed;            /* Efecto Parallax: El fondo permanece fijo mientras se hace scroll */
         }
 
-        /* BANNER TOTALMENTE CORREGIDO */
+        /* BANNER PRINCIPAL (SOLUCIÓN AL CORTE HORIZONTAL) */
         .portada-banner {
-            width: 100%;
-            height: 300px;
+            width: 100%;                             /* Ocupa la totalidad del ancho de la pantalla */
+            height: 300px;                           /* Mantiene una altura fija controlada */
             background: url('https://i.postimg.cc/WbQGgvFk/Mu-online-imagente-para-portada.jpg') no-repeat;
-            background-size: 100% 100%;
-            background-position: center center;
-            border-bottom: 3px solid var(--acento-oro);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+            background-size: 100% 100%;              /* Fuerza a que la imagen se estire exactamente al 100% de ancho y alto */
+            background-position: center center;      /* Centra la imagen en ambos ejes */
+            border-bottom: 3px solid var(--acento-oro); /* Línea divisoria inferior dorada */
+            box-shadow: 0 5px 25px rgba(0,0,0,0.8);  /* Sombra para dar profundidad sobre el header */
         }
 
+        /* CABECERA DE NAVEGACIÓN (HEADER) */
         header {
             background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            position: sticky;
+            backdrop-filter: blur(16px);             /* Efecto esmerilado (Glassmorphism) moderno */
+            -webkit-backdrop-filter: blur(16px);     /* Compatibilidad del efecto esmerilado en navegadores Safari */
+            position: sticky;                        /* Hace que el menú quede fijo en la parte superior al hacer scroll */
             top: 0;
             display: flex;
-            flex-direction: column;
+            flex-direction: column;                  /* Alinea el logo arriba y los botones abajo */
             align-items: center;
             padding: 20px 5%;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            z-index: 100;
-            gap: 15px;
+            z-index: 100;                            /* Asegura que el menú siempre quede por encima del contenido */
+            gap: 15px;                               /* Espaciado interno entre el logo y la barra de navegación */
         }
 
+        /* ESTILO DEL LOGOTIPO */
         .logo {
             font-weight: 900;
             font-size: 38px;
             color: var(--acento-oro);
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            text-shadow: 0 0 20px var(--glow-oro), 0 4px 8px rgba(0,0,0,0.9);
+            text-transform: uppercase;               /* Todo en mayúsculas */
+            letter-spacing: 6px;                     /* Separación estilizada entre letras */
+            text-shadow: 0 0 20px var(--glow-oro), 0 4px 8px rgba(0,0,0,0.9); /* Resplandor dorado de fondo */
             text-align: center;
         }
 
+        /* BARRA DE BOTONES DE NAVEGACIÓN */
         nav {
             display: flex;
-            gap: 15px;
+            gap: 15px;                               /* Separación entre botones */
             justify-content: center;
             width: 100%;
-            flex-wrap: wrap;
+            flex-wrap: wrap;                         /* Si la pantalla es chica, los botones se acomodan abajo solos */
         }
 
+        /* BOTONES DE NAVEGACIÓN INDIVIDUALES */
         nav button {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255,255,255,0.1);
@@ -86,35 +94,40 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición fluida de estados */
             border-radius: 6px;
         }
 
+        /* ESTADO HOVER (PASAR EL MOUSE) Y BOTÓN ACTIVO */
         nav button:hover, nav button.active-nav {
             background-color: var(--acento-oro);
-            color: #020617;
+            color: #020617;                          /* Invierte el color del texto al fondo del body */
             border-color: var(--acento-oro);
-            box-shadow: 0 0 25px var(--glow-oro);
-            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--glow-oro);    /* Brillo de selección */
+            transform: translateY(-2px);             /* Pequeño salto hacia arriba al seleccionarlo */
         }
 
+        /* CONTENEDORES DE PESTAÑAS (SISTEMA SPA) */
         .tab-content {
-            display: none;
+            display: none;                           /* Por defecto ocultamos todas las pestañas */
             padding: 50px 5%;
             max-width: 1200px;
-            margin: 0 auto;
-            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0 auto;                          /* Centra el bloque de contenido en pantallas grandes */
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Animación de entrada fluida */
         }
 
+        /* CLASE DINÁMICA QUE MUESTRA LA PESTAÑA SELECCIONADA ADICIONADA POR JS */
         .tab-content.active {
-            display: block;
+            display: block;                          /* Muestra el elemento en pantalla */
         }
 
+        /* ANIMACIÓN DE ENTRADA (DESVANECIMIENTO Y SUBIDA) */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); } /* Inicia transparente y 20px abajo */
+            to { opacity: 1; transform: translateY(0); }       /* Finaliza visible en su posición original */
         }
 
+        /* CONFIGURACIÓN DE TÍTULOS PRINCIPALES H2 Y SECUNDARIOS H3 */
         h2 {
             font-size: 40px;
             font-weight: 900;
@@ -132,12 +145,13 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-bottom: 2px solid var(--borde);
+            border-bottom: 2px solid var(--borde);     /* Línea decorativa inferior */
             padding-bottom: 10px;
             margin-top: 0;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
+        /* TARJETAS CONTENEDORAS PRINCIPALES (CARDS) */
         .card {
             background: var(--bg-card);
             backdrop-filter: blur(12px);
@@ -149,17 +163,20 @@
             margin-bottom: 35px;
         }
 
+        /* GRILLA DE INFORMACIÓN EN INICIO (RESPONSIVE AUTOMÁTICO) */
         .info-grid {
             display: grid;
+            /* Crea columnas automáticas de mínimo 260px y máximo el espacio restante */
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
             margin-top: 35px;
         }
 
+        /* SUB-TARJETAS DE INFORMACIÓN INTERNAS */
         .info-subcard {
             background: rgba(2, 6, 23, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 3px solid var(--acento-azul);
+            border-top: 3px solid var(--acento-azul);  /* Borde superior celeste tecnológico */
             border-radius: 12px;
             padding: 25px;
             transition: all 0.3s ease;
@@ -167,7 +184,7 @@
 
         .info-subcard:hover {
             transform: translateY(-5px);
-            border-color: var(--acento-oro);
+            border-color: var(--acento-oro);           /* El borde cambia a oro al pasar el mouse */
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
@@ -187,22 +204,25 @@
             margin: 0;
         }
 
+        /* MAQUETACIÓN EXCLUSIVA PARA EL VIDEO DE YOUTUBE (LIMITADO AL 75%) */
         .video-wrapper {
-            max-width: 75%;
-            margin: 40px auto 0 auto;
+            max-width: 75%;                          /* Limita el contenedor al 75% del ancho de la card */
+            margin: 40px auto 0 auto;                /* Centra el bloque horizontalmente (auto izquierdo y derecho) */
         }
 
+        /* MANTIENE LA PROPORCIÓN 16:9 DEL VIDEO DE FORMA RESPONSIVE */
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%;                  /* Relación de aspecto matemática para 16:9 (9 / 16 = 0.5625) */
             height: 0;
             border-radius: 14px;
-            overflow: hidden;
+            overflow: hidden;                        /* Corta las esquinas del iframe para respetar el border-radius */
             border: 2px solid var(--acento-oro);
             box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
         }
 
+        /* FUERZA AL IFRAME EMBEBIDO A TOMAR LAS MEDIDAS EXACTAS DE SU CONTENEDOR */
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -211,12 +231,14 @@
             height: 100%;
         }
 
+        /* GRILLA DE LA WEBSHOP */
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 30px;
         }
 
+        /* TARJETAS DE PRODUCTOS DE LA WEBSHOP */
         .item-card {
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -224,8 +246,8 @@
             padding: 22px;
             text-align: center;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            flex-direction: column;                  /* Distribución vertical interna */
+            justify-content: space-between;          /* Mantiene el botón abajo y los datos arriba alineados */
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
@@ -236,14 +258,15 @@
             box-shadow: 0 20px 40px rgba(251, 191, 36, 0.25);
         }
 
+        /* CONTENEDOR SEGURO DE IMÁGENES DE LA SHOP */
         .item-img {
             width: 100%;
             height: 160px;
             background: rgba(2, 6, 23, 0.8);
             border-radius: 12px;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center;                     /* Centrado vertical de la imagen */
+            justify-content: center;                 /* Centrado horizontal de la imagen */
             overflow: hidden;
             border: 1px solid rgba(251, 191, 36, 0.1);
             margin-bottom: 15px;
@@ -252,10 +275,11 @@
         .item-img img {
             max-width: 90%;
             max-height: 90%;
-            object-fit: contain;
+            object-fit: contain;                     /* Escalado proporcional: previene la distorsión del ítem */
             transition: transform 0.3s ease;
         }
 
+        /* EFECTO ZOOM AL PASAR EL MOUSE POR ENCIMA DEL ÍTEM */
         .item-card:hover .item-img img {
             transform: scale(1.1);
         }
@@ -264,33 +288,38 @@
         .item-category { font-size: 11px; color: var(--acento-azul); text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; }
         .item-price { color: var(--acento-oro); font-weight: 900; font-size: 22px; margin: 12px 0; text-shadow: 0 0 10px rgba(251,191,36,0.4); }
 
+        /* COMPONENTES DE FORMULARIOS DE ACCESO */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--acento-azul); text-transform: uppercase; }
         input { width: 100%; padding: 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; box-sizing: border-box; background-color: rgba(15, 23, 42, 0.7); color: #fff; font-size: 15px; }
         input:focus { outline: none; border-color: var(--acento-oro); box-shadow: 0 0 15px var(--glow-oro); }
 
+        /* BOTONES CON EFECTO DE RESPLANDOR (GLOW) */
         .btn-glow { background: linear-gradient(135deg, #fbbf24, #d97706); color: #020617; border: none; padding: 14px 24px; border-radius: 8px; font-size: 15px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(217, 119, 6, 0.4); }
         .btn-glow:hover { box-shadow: 0 0 30px var(--glow-oro); transform: translateY(-2px); }
         
+        /* CONTENEDOR Y TABLA DE RANKINGS DE PERSONAJES */
         .table-container { background: rgba(15, 23, 42, 0.9); border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); max-height: 550px; overflow-y: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 16px 22px; font-size: 14px; }
         th { background-color: rgba(2, 6, 23, 0.95); color: var(--acento-azul); position: sticky; top: 0; font-weight: 800; text-transform: uppercase; }
         tr { border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        tr:hover td { background-color: rgba(255, 255, 255, 0.04); }
+        tr:hover td { background-color: rgba(255, 255, 255, 0.04); } /* Feedback visual en filas */
 
+        /* PANEL AVANZADO DE USUARIO - ESTRUCTURA MIXTA (DUEÑO DE CUENTA) */
         .account-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        @media (max-width: 768px) { .account-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .account-grid { grid-template-columns: 1fr; } } /* Columna única en móviles */
         .metric-box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px; }
         .metric-card { background: rgba(2, 6, 23, 0.6); padding: 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
         .metric-val { font-size: 22px; font-weight: 900; color: var(--acento-azul); }
 
+        /* PANEL TIPO LOG CIBERNÉTICO (TELEMETRÍA DE CÁTEDRA) */
         .ia-panel {
             border: 1px dashed var(--ia-cyber);
             background: rgba(16, 185, 129, 0.03);
             padding: 20px;
             border-radius: 12px;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Courier New', Courier, monospace;    /* Tipografía estilo consola de comandos */
             font-size: 13px;
             color: #a7f3d0;
             margin-top: 40px;
@@ -300,11 +329,14 @@
 </head>
 <body>
 
+    <!-- Bloque superior que aloja el Banner unificado -->
     <div class="portada-banner"></div>
 
+    <!-- Encabezado de Navegación del Sitio -->
     <header>
         <div class="logo">Mu Next-Gen</div>
         <nav>
+            <!-- El evento onclick ejecuta la función openTab de JavaScript pasando el ID de la pestaña -->
             <button id="btn-inicio" class="active-nav" onclick="openTab('inicio')">Inicio</button>
             <button id="btn-login" onclick="openTab('login')">Acceso</button>
             <button id="btn-ranking" onclick="openTab('ranking')">Ranking</button>
@@ -313,7 +345,7 @@
         </nav>
     </header>
 
-    <!-- INICIO -->
+    <!-- SECCIÓN: INICIO (Activa de forma predeterminada mediante la clase 'active') -->
     <div id="inicio" class="tab-content active">
         <h2>Crónicas del Continente Perdido</h2>
         <div class="card">
@@ -322,6 +354,7 @@
                 Adéntrate en el MMORPG que definió una era de fantasía oscura medieval en un ecosistema adaptativo de alto rendimiento. En <strong>Mu Next-Gen</strong>, la exploración algorítmica y la destreza lógica se fusionan para dar vida a batallas épicas en tiempo real contra las fuerzas oscuras del resurgido demonio <strong>Kundan</strong>.
             </p>
 
+            <!-- Subcards de información del servidor -->
             <div class="info-grid">
                 <div class="info-subcard">
                     <h4>⚔️ Evolución Dinámica</h4>
@@ -341,13 +374,14 @@
                 </div>
             </div>
 
-            <!-- CONTENEDOR DE VIDEO AL 75% Y CENTRADO -->
+            <!-- Contenedor Maquetado para el Video de YouTube -->
             <div class="video-wrapper">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/ofqbFz5ypgU" title="Mu Online Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
 
+            <!-- Caja de estado/Auditoría simulada -->
             <div class="ia-panel">
                 <span style="color: var(--ia-cyber); font-weight:bold;">[LOG_INFO // METRIC_ENGINE_ACTIVE]:</span> Ejecutando auditoría de balance estadístico del servidor central... <br>
                 > Clases registradas: DK (34.2%) | DW (28.1%) | FE (19.8%) | DL (17.9%). <br>
@@ -357,7 +391,7 @@
         </div>
     </div>
 
-    <!-- ACCESO -->
+    <!-- SECCIÓN: ACCESO / LOGIN -->
     <div id="login" class="tab-content">
         <div class="card" style="max-width:450px; margin: 0 auto;">
             <h3 id="auth-title" style="text-align:center;">Ingresar al Reino</h3>
@@ -373,7 +407,7 @@
         </div>
     </div>
 
-    <!-- RANKING -->
+    <!-- SECCIÓN: RANKING GLOBAL (Se llena dinámicamente con JS) -->
     <div id="ranking" class="tab-content">
         <h2>Top 20 Héroes Globales</h2>
         <div class="card" style="padding:15px;">
@@ -390,23 +424,26 @@
                         </tr>
                     </thead>
                     <tbody id="ranking-tbody">
+                        <!-- Destino de las filas creadas algorítmicamente por JavaScript -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- WEBSHOP -->
+    <!-- SECCIÓN: WEBSHOP (Se llena dinámicamente con JS) -->
     <div id="shop" class="tab-content">
         <h2>WebShop Premium</h2>
         <div class="shop-grid" id="shop-grid">
+            <!-- Destino de las tarjetas de ítems generadas por JavaScript -->
         </div>
     </div>
 
-    <!-- MI CUENTA -->
+    <!-- SECCIÓN: MI CUENTA / CONTROL PANEL -->
     <div id="cuenta" class="tab-content">
         <h2>Panel Avanzado del Usuario</h2>
         <div class="account-grid">
+            <!-- Columna Izquierda: Datos Estáticos simulados -->
             <div class="card">
                 <h3>Información de Cuenta</h3>
                 <p><strong>Estado Conexión:</strong> <span id="user-status" style="color: #ef4444; font-weight: bold;">Desconectado (Modo Demo)</span></p>
@@ -417,6 +454,7 @@
                 <button class="btn-secondary" style="margin-top:15px; color:#ef4444; border-color:#ef4444; padding:10px 15px; background:none; cursor:pointer; border-radius:6px;" onclick="alert('Cerrando sesión simulada')">Cerrar Sesión</button>
             </div>
 
+            <!-- Columna Derecha: Métricas Analíticas / Telemetría del Jugador -->
             <div class="card">
                 <h3><span style="font-size:14px; float:right; color:var(--ia-cyber);">Telemetry v1.2</span>Métricas de Datos</h3>
                 <p style="font-size:13px; color:var(--texto-secundario); margin:0;">Análisis predictivo de rendimiento basado en tus últimas sesiones:</p>
@@ -442,7 +480,9 @@
         </div>
     </div>
 
+    <!-- LOGICA DE PROGRAMACIÓN (JAVASCRIPT) -->
     <script>
+        /* DICCIONARIO KEY-VALUE: Almacena las imágenes y capas oscuras de fondo correspondientes a cada sección */
         const fondosPorPestaña = {
             'inicio': "linear-gradient(rgba(2, 6, 23, 0.88), rgba(2, 6, 23, 0.88)), url('https://i.postimg.cc/nr2WMLcB/imagen-para-fondo-general.jpg')",
             'login': "linear-gradient(rgba(2, 6, 23, 0.88), rgba(2, 6, 23, 0.88)), url('https://i.postimg.cc/pLfFjnMB/imagen-de-fondo-para-la-creacion-de-cuentas.jpg')",
@@ -451,6 +491,7 @@
             'cuenta': "linear-gradient(rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.9)), url('https://i.postimg.cc/nr2WMLcB/imagen-para-fondo-general.jpg')"
         };
 
+        /* ARRAY DE OBJETOS: Estructura de Base de Datos local para simular los productos de la WebShop */
         const CATALOGO_WEBSHOP = [
             { nombre: "Archangel Sword +15 [Full]", categoria: "Armas", precio: 7500, img: "https://i.postimg.cc/rm4PkJrK/archangel-sword.jpg" },
             { nombre: "Archangel Staff +15 [Full]", categoria: "Armas", precio: 7300, img: "https://i.postimg.cc/Gmpg2rDw/archengel-staff.jpg" },
@@ -465,47 +506,63 @@
             { nombre: "Set Titan Plate +15 [Godlike]", categoria: "Armaduras", precio: 9500, img: "https://i.postimg.cc/YCVRCFkf/titan-set.jpg" }
         ];
 
+        /* NAVEGACIÓN SPA NATIVA: Controla qué sección ocultar o mostrar mediante la manipulación del DOM */
         function openTab(tabId) {
+            // Oculta todos los elementos con la clase '.tab-content' removiendo la clase 'active'
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            // Agrega la clase 'active' únicamente al ID de la pestaña seleccionada
             document.getElementById(tabId).classList.add('active');
 
+            // Quita el estilo visual de selección activa a todos los botones del menú
             document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active-nav'));
+            // Le da el estilo activo al botón clickeado
             document.getElementById(`btn-${tabId}`).classList.add('active-nav');
 
+            // Actualiza dinámicamente la propiedad CSS del fondo del body según el diccionario de fondos
             document.body.style.backgroundImage = fondosPorPestaña[tabId];
 
+            // Condicionales lógicos para ejecutar generación controlada y evitar sobrecarga de procesamiento
             if (tabId === 'ranking') generarRankingAleatorio();
             if (tabId === 'shop') generarWebShop();
         }
 
+        /* FUNCIÓN MOCK DE TELEMETRÍA: Genera, ordena matemáticamente y renderiza un set aleatorio de 20 personajes */
         function generarRankingAleatorio() {
+            // Datos semilla para construir los personajes
             const nombresSeed = ["GokuMU", "X_SoulLord_X", "SlayerPro", "CharlyIA", "BkMitico", "SM_NextGen", "Nirvana", "KundanDie", "DataWizard", "AlphaPVP", "LordMu", "ElfSoporte", "PythonUser", "MatrixBK", "Zeus", "HydraDW", "Ragnar", "Siren", "Titan", "Valkyrie"];
             const clasesSeed = ["Blade Knight", "Soul Master", "Muse Elf", "Magic Gladiator", "Dark Lord"];
             
             let datasetPersonajes = [];
 
+            // Bucle for: Genera los 20 personajes mezclando datos semilla y números aleatorios
             for(let i=0; i < 20; i++) {
                 datasetPersonajes.push({
                     nombre: nombresSeed[i % nombresSeed.length] + "_" + Math.floor(Math.random() * 99),
                     clase: clasesSeed[Math.floor(Math.random() * clasesSeed.length)],
-                    resets: Math.floor(Math.random() * 300) + 200,
-                    nivel: Math.floor(Math.random() * 50) + 350,
+                    resets: Math.floor(Math.random() * 300) + 200,      // Resets aleatorios entre 200 y 500
+                    nivel: Math.floor(Math.random() * 50) + 350,       // Niveles aleatorios entre 350 y 400
                     online: Math.random() > 0.4 ? "<span style='color:#10b981;'>Online</span>" : "<span style='color:#64748b;'>Offline</span>"
                 });
             }
 
+            /* MÉTODO SORT CON ALGORITMO COMPUESTO:
+               Ordena primero por cantidad de Resets de mayor a menor.
+               Si los Resets son iguales (b.resets === a.resets), desempata comparando el Nivel Base. */
             datasetPersonajes.sort((a, b) => {
                 if (b.resets === a.resets) return b.nivel - a.nivel;
                 return b.resets - a.resets;
             });
 
+            // Captura el nodo del cuerpo de la tabla del ranking y borra el contenido anterior
             const tbody = document.getElementById('ranking-tbody');
             tbody.innerHTML = '';
+            
+            // Itera e inyecta dinámicamente las cadenas HTML mapeadas con estilos condicionales para el Top 3 (Podio)
             datasetPersonajes.forEach((pj, index) => {
                 let colorRank = "";
-                if(index === 0) colorRank = "color:#fbbf24; font-size:16px; font-weight:900;";
-                if(index === 1) colorRank = "color:#94a3b8; font-size:15px;";
-                if(index === 2) colorRank = "color:#b45309;";
+                if(index === 0) colorRank = "color:#fbbf24; font-size:16px; font-weight:900;"; // Oro para el #1
+                if(index === 1) colorRank = "color:#94a3b8; font-size:15px;";                 // Plata para el #2
+                if(index === 2) colorRank = "color:#b45309;";                                 // Bronce para el #3
 
                 tbody.innerHTML += `
                     <tr>
@@ -520,18 +577,24 @@
             });
         }
 
+        /* FUNCIÓN DE ECONOMÍA ADAPTATIVA: Renderiza la WebShop aplicando fluctuaciones aleatorias en los precios */
         function generarWebShop() {
             const grid = document.getElementById('shop-grid');
-            grid.innerHTML = '';
+            grid.innerHTML = ''; // Limpieza del contenedor para evitar duplicados en la re-entrada
 
             CATALOGO_WEBSHOP.forEach(item => {
+                /* ALGORITMO DE PRECIOS DINÁMICOS:
+                   Calcula un multiplicador aleatorio entre el 95% y el 105% (0.95 + random * 0.1)
+                   para simular fluctuaciones de oferta/demanda del mercado real sobre el precio base. */
                 const precioFluctuante = Math.floor(item.precio * (0.95 + Math.random() * 0.1));
 
+                // Construcción de la interfaz e inclusión de la directiva de seguridad integral 'onerror' para enlaces caídos
                 grid.innerHTML += `
                     <div class="item-card">
                         <div>
                             <span class="item-category">${item.categoria}</span>
                             <div class="item-img">
+                                <!-- onerror: Si el link de la imagen falla o da error 404, inyecta automáticamente un marcador de posición dinámico para evitar la ruptura estética -->
                                 <img src="${item.img}" alt="${item.nombre}" onerror="this.src='https://via.placeholder.com/150/0f172a/ffffff?text=Item+Error'">
                             </div>
                             <div class="item-title">${item.nombre}</div>
@@ -545,11 +608,13 @@
             });
         }
 
+        /* MANEJADOR DE AUTENTICACIÓN SIMULADA */
         function manejarAuth() {
             alert("Simulación de consulta de credenciales. Conexión establecida con éxito.");
-            openTab('cuenta');
+            openTab('cuenta'); // Redirecciona de inmediato al panel de cuenta tras "autenticarse"
         }
 
+        // ESTADO DE INICIALIZACIÓN: Define la imagen de fondo de la sección de 'inicio' apenas carga el archivo
         document.body.style.backgroundImage = fondosPorPestaña['inicio'];
     </script>
 </body>
